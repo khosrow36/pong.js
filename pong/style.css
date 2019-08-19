@@ -1,0 +1,49 @@
+body{
+    background-color: #222d32;
+    display: flex;
+    justify-content: center;
+    font-family: 'Merriweather', serif;
+}
+#scoreboard{
+    position: absolute;
+    top: 50px;
+    margin: auto;
+}
+#scoreboard h1{
+    display: inline-block;
+    color: #409998;
+    margin: 0 25px 0 25px;
+}
+#scoreboard .name{
+    color: grey;
+}
+#scoreboard .score{
+    color: white;
+    font-size: 1.5em;
+}
+#containter{
+    width: 500px;
+    height: 300px;
+    margin-top: 100px;
+    border: 2px solid #409998;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.paddle{
+    width: 7px;
+    height: 100px;
+    background-color: white;
+}
+#pad1{
+    margin-left: 10px;
+}
+#pad2{
+    margin-right: 10px;
+}
+.ball{
+    background-color: white;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
