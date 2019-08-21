@@ -39,11 +39,12 @@ body{
     margin-left: 10px;
 }
 #pad2{
-    margin-right: 10px;
+    margin-right: 10px; /*this value has to be the same as #pad1 margin-left */
 }
-.ball{
+#ball{
     background-color: white;
     border-radius: 50%;
     width: 15px;
     height: 15px;
+    /* width and heigth values should be identical */
 }
