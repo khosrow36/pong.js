@@ -4,11 +4,11 @@ function init(){
     ballStyles = window.getComputedStyle(document.querySelector("#ball"));
 
     paddleHeight = paddleStyles.getPropertyValue('height');
-    paddleWidth = paddleStyles.getPropertyValue('width');
-    paddleMargin = paddleStyles.getPropertyValue('margin-left');
+    paddleWidth = parseInt(paddleStyles.getPropertyValue('width'));
+    paddleMargin = parseInt(paddleStyles.getPropertyValue('margin-left'));
 
-    halfContHeigth = parseInt(containerStyles.getPropertyValue('height'))/2;
-    contWidth = containerStyles.getPropertyValue('width')
+    halfContHeigth = parseInt(containerStyles.getPropertyValue('height')) / 2;
+    contWidth = parseInt(containerStyles.getPropertyValue('width'));
 
     topBallPos = parseInt(ballStyles.getPropertyValue('margin-top'));
     leftBallPos = parseInt(ballStyles.getPropertyValue('margin-left'));
@@ -41,16 +41,28 @@ function ballMovement(){
     const speed = Math.random() * 7 + 4;
     const bottomBouncePosition = halfContHeigth * 2 - ballHeight;
     const topBouncePosition = bottomBouncePosition * -1;
+    const rightBouncePosition = contWidth - paddleMargin - paddleWidth*2 - ballHeight*2;
+    const leftBouncePosition = rightBouncePosition * -1;
+    console.log(rightBouncePosition);
+    console.log(leftBouncePosition);
     let topDirection = 1;
-    window.setInterval(function show() {
+    let leftDirection = 1;
+    window.setInterval(function show(){
         if(topBallPos > bottomBouncePosition){
             topDirection *= -1;
         }
-        else if (topBallPos < topBouncePosition){
+        else if(topBallPos < topBouncePosition){
             topDirection *= -1;
         }
+
+        if (leftBallPos >= rightBouncePosition){
+            leftDirection *= -1;
+        }
+        else if (leftBallPos <= leftBouncePosition){
+            leftDirection *= -1;
+        }
         topBallPos += speed * topDirection;
-        leftBallPos += speed;
+        leftBallPos += speed * leftDirection;
         document.getElementById("ball").style.marginTop = (topBallPos) + "px";
         document.getElementById("ball").style.marginLeft = (leftBallPos) + "px";
         
