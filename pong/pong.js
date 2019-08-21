@@ -1,13 +1,16 @@
-function test(){
-    var paddleStyles = window.getComputedStyle(document.querySelector(".paddle"));
-    var containerStyles = window.getComputedStyle(document.querySelector("#containter"));
+function init(){
+    paddleStyles = window.getComputedStyle(document.querySelector(".paddle"));
+    containerStyles = window.getComputedStyle(document.querySelector("#containter"));
     
-    var paddleHeight = paddleStyles.getPropertyValue('height');
-    var pad1Margin = 0;
+    paddleHeight = paddleStyles.getPropertyValue('height');
+    pad1Margin = 0;
     
-    const halfContHeigth = parseInt(containerStyles.getPropertyValue('height'))/2;
-    console.log(halfContHeigth);
+    halfContHeigth = parseInt(containerStyles.getPropertyValue('height'))/2;
+    playersMovement();
+}
 
+function playersMovement(){
+    console.log(halfContHeigth);
     document.addEventListener('keydown', function (e) {
         //W key pressed
         if (e.keyCode == 87 || e.which == 87) { 
