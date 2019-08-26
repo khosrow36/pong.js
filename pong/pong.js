@@ -55,7 +55,7 @@ function addScore(player){
 
 }
 function ballMovement(){
-    const speed = Math.random() * 7 + 4;
+    const speed = 5;
     const bottomBouncePosition = halfContHeigth * 2 - ballHeight;
     const topBouncePosition = bottomBouncePosition * -1;
     const rightBouncePosition = contWidth - paddleMargin - paddleWidth*2 - ballHeight*2;
@@ -80,8 +80,8 @@ function ballMovement(){
             else{
                 topDirection = 0;
                 leftDirection = 0;
-                topBallPos=0;
-                leftBallPos=0;
+                topBallPos = 0;
+                leftBallPos = 0;
                 addScore(1);
             }
         }
@@ -96,8 +96,8 @@ function ballMovement(){
             else{
                 topDirection = 0;
                 leftDirection = 0;
-                topBallPos=0;
-                leftBallPos=0;
+                topBallPos = 0;
+                leftBallPos = 0;
                 addScore(2);
             }
         }
