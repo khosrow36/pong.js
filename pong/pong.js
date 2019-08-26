@@ -1,11 +1,13 @@
 function init(){
     paddleStyles = window.getComputedStyle(document.querySelector("#pad1"));
+    paddle2Styles = window.getComputedStyle(document.querySelector("#pad2"));
     containerStyles = window.getComputedStyle(document.querySelector("#containter"));
     ballStyles = window.getComputedStyle(document.querySelector("#ball"));
 
-    paddleHeight = paddleStyles.getPropertyValue('height');
+    paddleHeight = parseInt(paddleStyles.getPropertyValue('height'));
     paddleWidth = parseInt(paddleStyles.getPropertyValue('width'));
     paddleMargin = parseInt(paddleStyles.getPropertyValue('margin-left'));
+    paddle2MarginTop = parseInt(paddle2Styles.getPropertyValue('margin-top'));
 
     halfContHeigth = parseInt(containerStyles.getPropertyValue('height')) / 2;
     contWidth = parseInt(containerStyles.getPropertyValue('width'));
@@ -37,14 +39,15 @@ function playersMovement(){
         }
     }, false);
 }
+
 function ballMovement(){
     const speed = Math.random() * 7 + 4;
     const bottomBouncePosition = halfContHeigth * 2 - ballHeight;
     const topBouncePosition = bottomBouncePosition * -1;
     const rightBouncePosition = contWidth - paddleMargin - paddleWidth*2 - ballHeight*2;
     const leftBouncePosition = rightBouncePosition * -1;
-    console.log(rightBouncePosition);
-    console.log(leftBouncePosition);
+    // console.log(rightBouncePosition);
+    // console.log(leftBouncePosition);
     let topDirection = 1;
     let leftDirection = 1;
     window.setInterval(function show(){
@@ -54,17 +57,35 @@ function ballMovement(){
         else if(topBallPos < topBouncePosition){
             topDirection *= -1;
         }
-
+        // console.log(rightBouncePosition, leftBouncePosition);
         if (leftBallPos >= rightBouncePosition){
-            leftDirection *= -1;
+            let padStl = window.getComputedStyle(document.querySelector("#pad2"));
+            let marginTop = parseInt(padStl.getPropertyValue('margin-top'));
+            let paddlePos = Math.abs(marginTop) + paddleHeight;
+
+            if(Math.abs(topBallPos) <= paddlePos){
+                leftDirection *= -1;
+            }
+            else{
+                alert("Woho");
+            }
         }
         else if (leftBallPos <= leftBouncePosition){
-            leftDirection *= -1;
+            let padStl = window.getComputedStyle(document.querySelector("#pad1"));
+            let marginTop = parseInt(padStl.getPropertyValue('margin-top'));
+            
+            let paddlePos = Math.abs(marginTop) + paddleHeight;
+            if(Math.abs(topBallPos) <= paddlePos){
+                leftDirection *= -1;
+            }
+            else{
+                alert("Woho");
+            }
         }
         topBallPos += speed * topDirection;
         leftBallPos += speed * leftDirection;
         document.getElementById("ball").style.marginTop = (topBallPos) + "px";
         document.getElementById("ball").style.marginLeft = (leftBallPos) + "px";
         
-    }, 1000/30);
+    }, 1000/60);
 }
