@@ -20,6 +20,7 @@ function init(){
     p2score = 0;
     playersMovement();
     ballMovement();
+    computersMovement();
 }
 
 function playersMovement(){
@@ -88,8 +89,8 @@ function ballMovement(){
         else if (leftBallPos <= leftBouncePosition){
             let padStl = window.getComputedStyle(document.querySelector("#pad1"));
             let marginTop = parseInt(padStl.getPropertyValue('margin-top'));
-
             let paddlePos = Math.abs(marginTop) + paddleHeight;
+
             if(Math.abs(topBallPos) <= paddlePos){
                 leftDirection *= -1;
             }
@@ -107,4 +108,20 @@ function ballMovement(){
         document.getElementById("ball").style.marginLeft = (leftBallPos) + "px";
         
     }, 1000/60);
+}
+function computersMovement(){
+    window.setInterval(function show(){
+        let padStl = window.getComputedStyle(document.querySelector("#pad2"));
+        let marginTop = parseInt(padStl.getPropertyValue('margin-top'));
+        let middleOfPaddle = (marginTop + paddleHeight) / 2;
+        let currentTopBallPos = parseInt(ballStyles.getPropertyValue('margin-top'));
+
+        if(middleOfPaddle < currentTopBallPos){
+            marginTop += 10;
+        }
+        else if(middleOfPaddle > currentTopBallPos){
+            marginTop -= 10;
+        }
+        document.getElementById("pad2").style.marginTop = String(marginTop) + "px";
+    }, 500);
 }
